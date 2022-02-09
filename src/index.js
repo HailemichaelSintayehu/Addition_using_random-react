@@ -12,7 +12,8 @@ class App extends Component {
       num1: 1,
       num2: 1,
       score:0 ,
-      response:""
+      response:"",
+      incorrect:false
     };
   }
  render(){
@@ -28,7 +29,7 @@ class App extends Component {
   renderProblem() {
     return (
       <div>
-        <h1>{this.state.num1} + {this.state.num2}</h1>
+        <h1 className={this.state.incorrect ? "incorrect" : ""}> {this.state.num1} + {this.state.num2}</h1>
         <input onKeyPress={this.inputKeyPress} onChange = {this.updateResponse} value = {this.state.response} />
         <div>
           score:{this.state.score}  
@@ -63,6 +64,7 @@ class App extends Component {
       else{
         this.setState({
           response:""
+          incorrect:true
         });
 
       }
