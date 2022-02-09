@@ -1,75 +1,36 @@
 import React, { Component } from "react";
-import ReactDom from "react-dom";
-import "./index.css";
 
-// import registerServiceWorker from "./registerServiceWorker";
+import ReactDom from "react-dom";
+
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      num1: 1,
-      num2: 1,
-      score:0 ,
-      response:"",
-      incorrect:false
-    };
-  }
- render(){
-  
-        if(this.state.score >=5){
-           return this.renderWin();
-        }
-        else{
-          return this.renderProblem();
-        }
-
- }
-  renderProblem() {
-    return (
-      <div>
-        <h1 className={this.state.incorrect ? "incorrect" : ""}> {this.state.num1} + {this.state.num2}</h1>
-        <input onKeyPress={this.inputKeyPress} onChange = {this.updateResponse} value = {this.state.response} />
-        <div>
-          score:{this.state.score}  
-        </div>
-      </div>
-    );
-  }
-  renderWin(){
-    return(
-      <h1>
-        Congratulation,you win!
-      </h1>
-    );
-  }
-  updateResponse = (event) =>{
-      this.setState({
-          response:event.target.value
-      })
-  }
-  inputKeyPress = (event)=>{
-    if(event.key ==="Enter"){
-      const answer = parseInt(this.state.response);
-      if(answer ===this.state.num1 + this.state.num2){
-          this.setState(state =>({
-              score:state.score + 1,
-              num1: Math.ceil(Math.random() * 10),
-              num2:Math.ceil(Math.random() * 10),
-              response:"",
-              incorrect:false
-
-          }));
-      }
-      else{
-        this.setState({
-          response:"",
-          incorrect:true
-        });
-
-      }
+    constructor(props) {
+        super(props);
+        this.state={
+            tasks:["task1","task2","task3"],
+            input:""
+        };
     }
-  }
-}
+    render(){
+        return(
+            <div className="li">
+                <h1>Tasks</h1>
+                <ul className="ul">
+                    {this.state.tasks.map((task) =>
+                       <li >
+                           {task}
+                       </li>
+                        
+                        
+                        )}
+                </ul>
+            </div>
+        );
+    }
+     
+           
+}        
+
 ReactDom.render(<App />, document.getElementById("root"));
