@@ -1,17 +1,72 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { Component } from "react";
+import ReactDom from "react-dom";
+import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// import registerServiceWorker from "./registerServiceWorker";
+import "bootstrap/dist/css/bootstrap.css";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      num1: 1,
+      num2: 1,
+      score:0 ,
+      response:""
+    };
+  }
+ render(){
+  
+        if(this.state.score >=5){
+           return this.renderWin();
+        }
+        else{
+          return this.renderProblem();
+        }
+
+ }
+  renderProblem() {
+    return (
+      <div>
+        <h1>{this.state.num1} + {this.state.num2}</h1>
+        <input onKeyPress={this.inputKeyPress} onChange = {this.updateResponse} value = {this.state.response} />
+        <div>
+          score:{this.state.score}  
+        </div>
+      </div>
+    );
+  }
+  renderWin(){
+    return(
+      <h1>
+        Congratulation,you win!
+      </h1>
+    );
+  }
+  updateResponse = (event) =>{
+      this.setState({
+          response:event.target.value
+      })
+  }
+  inputKeyPress = (event)=>{
+    if(event.key ==="Enter"){
+      const answer = parseInt(this.state.response);
+      if(answer ===this.state.num1 + this.state.num2){
+          this.setState(state =>({
+              score:state.score + 1,
+              num1: Math.ceil(Math.random() * 10),
+              num2:Math.ceil(Math.random() * 10),
+              response:""
+
+          }));
+      }
+      else{
+        this.setState({
+          response:""
+        });
+
+      }
+    }
+  }
+}
+ReactDom.render(<App />, document.getElementById("root"));
