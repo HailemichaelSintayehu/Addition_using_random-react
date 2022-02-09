@@ -57,13 +57,14 @@ class App extends Component {
               score:state.score + 1,
               num1: Math.ceil(Math.random() * 10),
               num2:Math.ceil(Math.random() * 10),
-              response:""
+              response:"",
+              incorrect:false
 
           }));
       }
       else{
         this.setState({
-          response:""
+          response:"",
           incorrect:true
         });
 
