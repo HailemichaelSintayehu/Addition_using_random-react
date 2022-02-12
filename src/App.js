@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import Login from './components/Form';
+
+import Two from './components/props';
 
 
 class App extends Component{
     render(){
         return(
             <div className='App'>
-                < Login />
+                <Two/>
+
             </div>
         );
 
