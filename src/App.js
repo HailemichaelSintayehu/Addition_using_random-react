@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import Two from './components/props';
+import Application from './components/props';
 
 
 class App extends Component{
     render(){
         return(
             <div className='App'>
-                <Two/>
+                <Application/>
 
             </div>
         );

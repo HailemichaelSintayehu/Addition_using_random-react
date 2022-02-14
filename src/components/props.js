@@ -1,35 +1,62 @@
-import React, { Component } from 'react';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+import React,{Component} from 'react';
 
-    this.state = {
-      isShow: true,
-    };
-  }
 
-  toggleShow = () => {
-    this.setState(state => ({ isShow: !state.isShow }));
-  };
-
-  render() {
-    const greeting = 'Welcome to React';
-
-    return (
-      <div>
-        {this.state.isShow ? <Greeting greeting={greeting} /> : null}
-
-        <Button onClick={this.toggleShow} />
-      </div>
-    );
-  }
-}
-class Button extends Component {
+const users = [
+        {id:'1',firstname:"Robin",lastname:"weiruch"},
+        {id:'2',secondname:"Dennis",lastname:"weiruch"}
+];
+class Application extends Component{
     render(){
-       return <button onClick = {this.props.onClick}> Toggle show</button>
+        return(
+            <div>
+                <h1>Conditional rendering</h1>
+                <List list = {users}/>
+    
+            </div>
+        );
+    }
+}  
+class List extends Component{
+    render(){
+        if(!this.props.list){
+            return null;
+        }
+        if(!this.props.list.length){
+            return <p>Sorry, the list in empty</p>
+        }
+        else{
+            return (
+                <div>
+                    {this.props.list.map(item =>(
+                        <Item key = {item.id} item = {item}/>
+                    ))}
+                </div>
+            );
+        }
+     
+    }
+
+}
+
+class Item extends Component{
+    render(){
+        return (
+            <div>
+          
+
+    <li>{this.props.item.firstname} {this.props.item.secondname}</li>
+             
+            </div>
+        );
     }
 }
-const Greeting =props => <h1>{props.greeting}</h1>;
 
-export default App;
+// const Item = ({item}) => <div>
+//     <li>{item.firstname} {item.secondname}</li>
+
+// </div>
+    
+
+
+export default Application;
